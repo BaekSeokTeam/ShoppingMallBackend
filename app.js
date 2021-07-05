@@ -5,10 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+<<<<<<< HEAD
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test')//dk
+=======
+require("dotenv").config();
+var mongodbUri=`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.whee5.mongodb.net/test?authSource=admin&replicaSet=atlas-fbaqqf-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
+var apiRouter = require('./routes/api/index');
+>>>>>>> 94c87ba938237029f3b20c935049a03ecfa36439
 const mongoose = require('mongoose');
-const config = require('./config/config');
 var app = express();
 
 // view engine setup
@@ -22,8 +27,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+<<<<<<< HEAD
 app.use('/users', usersRouter);
 app.use('/test',testRouter);//dk
+=======
+app.use('/api', apiRouter);
+
+>>>>>>> 94c87ba938237029f3b20c935049a03ecfa36439
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,7 +51,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 // Connect to MONGODB SERVER
-mongoose.connect(config.mongodbUri, {
+mongoose.connect(mongodbUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

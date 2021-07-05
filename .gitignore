@@ -1,3 +1,7 @@
+#config.js
+config/
+
+
 # Logs
 logs
 *.log
