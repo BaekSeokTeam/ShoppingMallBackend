@@ -1,0 +1,71 @@
+const passport = require('passport');
+const { Strategy: LocalStrategy } = require('passport-local');
+const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
+
+require('dotenv').config();
+
+const User = require('../model/user');
+
+const passportConfig = { usernameField: 'email', passwordField: 'password' };
+
+const passportVerify = async (email, password, done) => {
+  try {
+
+    const user =  await User.findOne({ email: email});
+    console.log(user.password)
+    if (!user) {
+
+      done(null, false, { message: '존재하지 않는 사용자 입니다.' });
+      return;
+    }
+    var auth=user.authen(password);
+    if (auth){
+      done(null, user,{ message: 'success' });
+    }
+    else{
+      done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
+    }
+    // bcrypt.compare(password, user.password,(err,isMatched)=>{
+     
+    //   bycrpt
+    //   if(err){
+    //     done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
+    //   }
+    //   else{
+    //     done(null, user,{ message: 'success' });
+    //   }
+
+    // });
+
+  } catch (error) {
+    console.error(error);
+    done(error);
+  }
+};
+
+const JWTConfig = {
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: process.env.JWT_SECRET
+};
+
+const JWTVerify = async (jwtPayload, done) => {
+  try {
+		// payload의 id값으로 유저의 데이터 조회
+    const user = await User.findOne({ where: { id: jwtPayload.id } });
+		// 유저 데이터가 있다면 유저 데이터 객체 전송
+    if (user) {
+      done(null, user);
+      return;
+    }
+		// 유저 데이터가 없을 경우 에러 표시
+    done(null, false, { reason: '올바르지 않은 인증정보 입니다.' });
+  } catch (error) {
+    console.error(error);
+    done(error);
+  }
+};
+
+module.exports = () => {
+  passport.use('local', new LocalStrategy(passportConfig, passportVerify));
+  passport.use('jwt',   new JWTStrategy(JWTConfig, JWTVerify));
+};
