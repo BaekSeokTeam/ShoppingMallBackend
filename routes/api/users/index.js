@@ -19,9 +19,9 @@ router.post('/signin',  async(req, res, next) => {
       
 			// 인증이 실패했거나 유저 데이터가 없다면 에러 발생
       if (passportError || !user) {
-        console.log(1)
+
         console.log(passportError)
-        res.status(400).json({ message:info});
+        res.status(400).json({info});
         return;
       }
 			// user데이터를 통해 로그인 진행

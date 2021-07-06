@@ -12,9 +12,9 @@ const passportVerify = async (email, password, done) => {
   try {
 
     const user =  await User.findOne({ email: email});
-    console.log(user.password)
+    
     if (!user) {
-
+      
       done(null, false, { message: '존재하지 않는 사용자 입니다.' });
       return;
     }
