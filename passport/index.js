@@ -1,6 +1,7 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
 const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -18,24 +19,26 @@ const passportVerify = async (email, password, done) => {
       done(null, false, { message: '존재하지 않는 사용자 입니다.' });
       return;
     }
-    var auth=user.authen(password);
-    if (auth){
-      done(null, user,{ message: 'success' });
-    }
-    else{
-      done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
-    }
-    // bcrypt.compare(password, user.password,(err,isMatched)=>{
+    // var auth=user.authen(password);
+    // console.log(auth)
+    // if (auth){
+    //   done(null, user,{ message: 'success' });
+    // }
+    // else{
+    //   done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
+    // }
+    bcrypt.compare(password, user.password,(err,isMatched)=>{
      
-    //   bycrpt
-    //   if(err){
-    //     done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
-    //   }
-    //   else{
-    //     done(null, user,{ message: 'success' });
-    //   }
 
-    // });
+      if(isMatched){
+        done(null, user,{ message: 'success' });
+      }
+      else{
+       
+        done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
+      }
+
+    });
 
   } catch (error) {
     console.error(error);

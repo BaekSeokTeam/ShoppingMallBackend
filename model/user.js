@@ -28,9 +28,7 @@ User.pre("save", function (next) {
     }
   });
 
-User.methods.authen= async function(password){
-  return await bcrypt.compare(this.password,password)
-}
+
 User.statics.create = function (email, password, phonenumber) {
 
   const user = new this({
