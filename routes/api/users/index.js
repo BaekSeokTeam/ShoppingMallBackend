@@ -27,7 +27,7 @@ router.post('/signin',  async(req, res, next) => {
       }
 			// user데이터를 통해 로그인 진행
       req.login(user, { session: false }, (loginError) => {
-        console.log(2)
+
         if (loginError) {
           res.send(loginError);
           return;
@@ -35,8 +35,12 @@ router.post('/signin',  async(req, res, next) => {
 		// 클라이언트에게 JWT생성 후 반환
 		const token = jwt.sign(
 			{ email: user.email},
-			process.env.JWT_SECRET
+			process.env.JWT_SECRET,
+      {
+        expiresIn: '1m'    // 유효 시간은 5분
+      }
 		);
+
        res.json({ token });
       });
     })(req, res);
