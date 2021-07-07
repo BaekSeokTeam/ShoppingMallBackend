@@ -3,6 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const controller = require('./user.controller');
+const auth=require('../../../middleware/auth')
 require('dotenv').config();
 
 /* GET home page. */
@@ -44,4 +45,17 @@ router.post('/signin',  async(req, res, next) => {
     next(error);
   }
 });
+router.post('/test',auth, async (req, res, next) => {
+    
+	  try {
+	    res.json({
+         result: req.user,
+         test:"success"
+    });
+	  } catch (error) {
+	    console.error(error);
+	    next(error);
+	  }
+});
+
 module.exports = router;
