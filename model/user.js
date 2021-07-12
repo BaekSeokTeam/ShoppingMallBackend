@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const User = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  nickname:{type: String, required: true, unique: true},
   phonenumber: { type: String, required: true },
   admin: { type: Boolean, default: false },
 });
@@ -29,16 +30,27 @@ User.pre("save", function (next) {
   });
 
 
-User.statics.create = function (email, password, phonenumber) {
+User.statics.create = function (email,nickname, password, phonenumber) {
 
   const user = new this({
     email,
+    nickname,
     password,
     phonenumber,
   });
 
   // return the Promise
   return user.save();
+};
+User.statics.findOneByEmailAndNickName = async function (email,nickname) {
+  user=await this.findOne({
+    email
+  })
+  if(user) return user
+  user=await this.findOne({
+    nickname
+  })
+  return user
 };
 
 // find one user by using username
@@ -47,7 +59,12 @@ User.statics.findOneByEmail = function (email) {
     email,
   }).exec();
 };
-
+User.statics.findOneByNickname = function (nickname) {
+  
+  return this.findOne({
+    nickname,
+  }).exec();
+};
 
 
 

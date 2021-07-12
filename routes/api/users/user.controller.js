@@ -1,3 +1,4 @@
+const { checkout } = require('.');
 const User = require('../../../model/user');
 
 
@@ -9,20 +10,31 @@ const User = require('../../../model/user');
         phonenumber
     }
 */
+exports.findNickname = (req, res) => {
+
+};
+
 
 exports.signUp = (req, res) => {
-  const { email, password,passwordCheck, phonenumber } = req.body;
+  const { email,nickname, password,passwordCheck, phonenumber } = req.body;
 
   // create a new user if does not exist
 
-  const create = (user) => {
+
+  const check = (user) => {
+
     if (user) {
-      throw new Error('이미 가입된 이메일 입니다.');
+      if (user.email==email){
+        throw new Error('이미 가입된 이메일 입니다.');
+      }
+      else{
+        throw new Error('이미 가입된 닉네임 입니다.');
+      }
     } else {
         if (password!=passwordCheck){
             throw new Error('패스워드가 일치하지 않습니다.')
         }
-      return User.create(email, password, phonenumber);
+      return User.create(email,nickname, password, phonenumber);
     }
   };
 
@@ -44,8 +56,8 @@ exports.signUp = (req, res) => {
   };
 
   // check username duplication
-  User.findOneByEmail(email)
-    .then(create)
+  User.findOneByEmailAndNickName(email,nickname)
+    .then(check)
     .then(respond)
     .catch(onError);
 };
