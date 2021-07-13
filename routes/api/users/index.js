@@ -10,11 +10,13 @@ require('dotenv').config();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'user' });
 });
-router.get('/nicknamecheck', function(req, res, next) {
+router.get('/test',(req,res)=>{
   res.json({
-    body:req.query
+    test:req.query.nickname
   })
 });
+router.get('/nicknamecheck', controller.checkNickname);
+router.get('/emailcheck',controller.checkEmail);
 router.post('/signup', controller.signUp);
 router.post('/signin',  async(req, res, next) => {
   

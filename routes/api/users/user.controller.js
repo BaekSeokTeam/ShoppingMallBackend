@@ -1,18 +1,65 @@
-const { checkout } = require('.');
+//const { checkout } = require('.');
 const User = require('../../../model/user');
 
-
-/*
-    POST /api/user/signup
-    {
-        email,
-        password,
-        phonenumber
+exports.checkNickname = (req, res) => {
+  console.log(req.query.nickname)
+  const nickname=req.query.nickname
+  const check=(user)=>{
+    if(user){
+      throw new Error('이미 가입된 닉네임 입니다.');
     }
-*/
-exports.findNickname = (req, res) => {
+    return user
+  };
+  const respond=(True)=>{
+    res.json({
+      message: 'success'
+    
+    });
+  };
+  const onError=(error)=>{
+    res.status(403).json({
+      message: 'unsuccess',
+      error: error.message,
+     
+    });
+  }
+  User.findOneByNickname(nickname)
+  .then(check)
+  .then(respond)
+  .catch(onError);
 
 };
+
+
+
+
+exports.checkEmail = (req, res) => {
+  const email=req.query.email
+  const check=(user)=>{
+    if(user){
+      throw new Error('이미 가입된 이메일 입니다.');
+    }
+    return user;
+  };
+  const respond=()=>{
+    res.json({
+      message: 'success'
+    
+    });
+  };
+  const onError=(error)=>{
+    res.status(403).json({
+      message: 'unsuccess',
+      error: error.message,
+     
+    });
+  }
+  User.findOneByEmail(email)
+  .then(check)
+  .then(respond)
+  .catch(onError);
+};
+
 
 
 exports.signUp = (req, res) => {
@@ -20,9 +67,7 @@ exports.signUp = (req, res) => {
 
   // create a new user if does not exist
 
-
   const check = (user) => {
-
     if (user) {
       if (user.email==email){
         throw new Error('이미 가입된 이메일 입니다.');
@@ -48,10 +93,10 @@ exports.signUp = (req, res) => {
   // run when there is an error (username exists)
   const onError = (error) => {
     res.status(403).json({
+      
       message: 'unsuccess',
-      body: {
-        error: error.message,
-      },
+      error: error.message,
+
     });
   };
 
