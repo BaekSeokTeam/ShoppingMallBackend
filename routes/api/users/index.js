@@ -44,7 +44,7 @@ router.post('/signin',  async(req, res, next) => {
 			{ email: user.email},
 			process.env.JWT_SECRET,
       {
-        expiresIn: '1m'    // 유효 시간은 5분
+        expiresIn: '1d'    // 유효 시간은 5분
       }
 		);
 
@@ -56,17 +56,6 @@ router.post('/signin',  async(req, res, next) => {
     next(error);
   }
 });
-router.post('/test',auth, async (req, res, next) => {
-    
-	  try {
-	    res.json({
-         result: req.user,
-         test:"success"
-    });
-	  } catch (error) {
-	    console.error(error);
-	    next(error);
-	  }
-});
+
 
 module.exports = router;
