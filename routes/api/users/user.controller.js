@@ -12,13 +12,14 @@ exports.checkNickname = (req, res) => {
   };
   const respond=(True)=>{
     res.json({
-      message: 'success'
+      success:true,
+      nickname:nickname
     
     });
   };
   const onError=(error)=>{
     res.status(403).json({
-      message: 'unsuccess',
+      success: false,
       error: error.message,
      
     });
@@ -43,13 +44,14 @@ exports.checkEmail = (req, res) => {
   };
   const respond=()=>{
     res.json({
-      message: 'success'
+      success: true,
+      email:email
     
     });
   };
   const onError=(error)=>{
     res.status(403).json({
-      message: 'unsuccess',
+      success: false,
       error: error.message,
      
     });
@@ -86,7 +88,7 @@ exports.signUp = (req, res) => {
   // respond to the client
   const respond = (user) => {
     res.json({
-      message: 'success'
+      singup: True
     
     });
   };
@@ -94,7 +96,7 @@ exports.signUp = (req, res) => {
   const onError = (error) => {
     res.status(403).json({
       
-      message: 'unsuccess',
+      signup: false,
       error: error.message,
 
     });

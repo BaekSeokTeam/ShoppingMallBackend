@@ -10,11 +10,7 @@ require('dotenv').config();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'user' });
 });
-router.get('/test',(req,res)=>{
-  res.json({
-    test:req.query.nickname
-  })
-});
+
 router.get('/nicknamecheck', controller.checkNickname);
 router.get('/emailcheck',controller.checkEmail);
 router.post('/signup', controller.signUp);
@@ -29,7 +25,7 @@ router.post('/signin',  async(req, res, next) => {
       if (passportError || !user) {
 
         console.log(passportError)
-        res.status(400).json({info});
+        res.status(403).json({info});
         return;
       }
 			// user데이터를 통해 로그인 진행
@@ -44,10 +40,9 @@ router.post('/signin',  async(req, res, next) => {
 			{ email: user.email},
 			process.env.JWT_SECRET,
       {
-        expiresIn: '1d'    // 유효 시간은 5분
+        expiresIn: '1d'    // 유효 시간은 1일
       }
 		);
-
        res.json({ token });
       });
     })(req, res);

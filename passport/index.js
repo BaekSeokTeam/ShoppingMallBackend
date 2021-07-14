@@ -16,7 +16,7 @@ const passportVerify = async (email, password, done) => {
     
     if (!user) {
       
-      done(null, false, { message: '존재하지 않는 사용자 입니다.' });
+      done(null, false, {login:false,message: '존재하지 않는 사용자 입니다.' });
       return;
     }
     bcrypt.compare(password, user.password,(err,isMatched)=>{
@@ -27,7 +27,7 @@ const passportVerify = async (email, password, done) => {
       }
       else{
        
-        done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
+        done(null, false, {login:false, message: '올바르지 않은 비밀번호 입니다.' });
       }
 
     });
