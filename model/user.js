@@ -13,7 +13,8 @@ const User = new Schema({
     detailedAddr:String
   }],
   admin: { type: Boolean, default: false },
-  status:{type:Boolean,default:true}
+  status:{type:Boolean,default:true},
+  point:{type:Number,default:0}
 });
 
 // create new User document
