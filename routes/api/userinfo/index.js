@@ -8,5 +8,6 @@ router.get('/', function(req, res, next) {
     })
 });
 router.post('/revise', controller.changeUserInfo);
+router.get('/getcartlist', controller.getCart);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const User = require('../../../model/user');
+const Cart = require('../../../model/cart');
 
 exports.changeUserInfo =(req,res)=>{
     const phonenumber= req.body.phonenumber
@@ -15,4 +16,10 @@ exports.changeUserInfo =(req,res)=>{
     }
     )
     
+};
+exports.getCart =async (req,res)=>{
+   const cart=await Cart.find({user:req.user._id})
+    res.json({
+        cart:cart
+    })
 };
