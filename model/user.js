@@ -8,6 +8,10 @@ const User = new Schema({
   password: { type: String, required: true },
   nickname:{type: String, required: true, unique: true},
   phonenumber: { type: String, required: true },
+  address:[{
+    roadAddr:String,
+    detailedAddr:String
+  }],
   admin: { type: Boolean, default: false },
 });
 
@@ -66,7 +70,10 @@ User.statics.findOneByNickname = function (nickname) {
   }).exec();
 };
 
-
+User.methods.assignAdmin = function () {
+  this.admin = true;
+  return this.save();
+};
 
 
 module.exports = mongoose.model('User', User);

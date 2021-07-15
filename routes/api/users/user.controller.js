@@ -10,6 +10,7 @@ exports.checkNickname = (req, res) => {
     }
     return user
   };
+  
   const respond=(True)=>{
     res.json({
       success:true,
@@ -84,19 +85,34 @@ exports.signUp = (req, res) => {
       return User.create(email,nickname, password, phonenumber);
     }
   };
+  const count = (user) => {
+    newUser = user;
+    return User.count({}).exec();
+  };
+
+  const assign = (count) => {
+    if (count === 1) {
+      return newUser.assignAdmin();
+    } else {
+      // if not, return a promise that returns false
+      return Promise.resolve(false);  
+    }
+  };
 
   // respond to the client
-  const respond = (user) => {
-    res.json({
-      singup: True
+  const respond = (isAdmin) => {
+
+    return res.json({
+      singup: true
     
     });
   };
   // run when there is an error (username exists)
   const onError = (error) => {
+
     res.status(403).json({
       
-      signup: false,
+      signup: false,  
       error: error.message,
 
     });
@@ -105,6 +121,8 @@ exports.signUp = (req, res) => {
   // check username duplication
   User.findOneByEmailAndNickName(email,nickname)
     .then(check)
+    .then(count)
+    .then(assign)
     .then(respond)
     .catch(onError);
 };
