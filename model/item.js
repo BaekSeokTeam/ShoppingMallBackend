@@ -15,10 +15,10 @@ const Item = new Schema({
     name: { type: String, required: true, unique: true },
     description: String,
     price: Number,
-    imgURL: String,
     size:[String],
     count:[Number],
-    Tag:[String],
+    tag:[String],
+    imgURL: [String],
     uploadedDate:{type:Date, default:Date.now}
   });
 
