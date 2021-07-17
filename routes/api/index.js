@@ -7,6 +7,9 @@ var adminAuth=require('../../middleware/adminAuth')
 var admin=require('./admin/index')
 var item=require('./item/index')
 var test=require('./test/index')
+const fs = require('fs');
+const path = require('path');
+const filePath = path.join(__dirname, '../../public/api/');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'api' });
@@ -19,5 +22,7 @@ router.use('/admin', admin);
 router.use('/item', item);
 router.use('/test', test);
 router.use('/users', user);
-
+router.get('/img', function(req, res, next) {
+  res.render('index', { title: 'img' });
+});
 module.exports = router;

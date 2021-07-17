@@ -1,13 +1,13 @@
 const Item = require('../../../model/item');
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname, '../../../public/api/');
+const filePath = path.join(__dirname, '../../../public/images/');
 
 exports.addItem =(req,res)=>{
     var imgURL=[]
     const files=req.files
     for(var i=0;i<files.length;i++){
-        imgURL.push('http://localhost:3000'+ '/api/' + files[i].filename)
+        imgURL.push(`http://localhost:3000/images/`+files[i].filename)
     }
 
 //    res.json({
