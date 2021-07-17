@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 // (Date)
 
 const Item = new Schema({
-    name: String,
+    name: { type: String, required: true, unique: true },
     description: String,
     price: Number,
     imgURL: String,
@@ -28,5 +28,12 @@ const Item = new Schema({
   
     // return the Promise
     return newItem.save();
+  };
+
+
+  Item.statics.findOneByName = function (name) {
+    return this.findOne({
+      name,
+    }).exec();
   };
   module.exports = mongoose.model('Item', Item);

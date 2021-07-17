@@ -15,7 +15,7 @@ router.use('/userinfo', auth);
 router.use('/userinfo', userinfo);
 router.use('/admin', adminAuth);
 router.use('/admin', admin);
-router.use('/item', adminAuth);
+//router.use('/item', adminAuth); 테스트할때 로그인 귀찮아서 잠깐 주석처리
 router.use('/item', item);
 router.use('/test', test);
 router.use('/users', user);
