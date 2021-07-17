@@ -7,12 +7,10 @@ exports.addItem =(req,res)=>{
     var imgURL=[]
     const files=req.files
     for(var i=0;i<files.length;i++){
-        imgURL.push(`http://localhost:3000/images/`+files[i].filename)
+        imgURL.push(`http://localhost:3000/`+files[i].filename)
     }
 
-//    res.json({
-//        body:req.body
-//    })
+
     const itemInfo={
         name: req.body.name,
         description: req.body.description,
@@ -24,13 +22,14 @@ exports.addItem =(req,res)=>{
     }
 
     const create = (item) => {
+        const files=req.files
         if (item) {
-
-        for(var i=0;i<files.length;i++){
+       
+        for(let i=0;i<files.length;i++){
           fs.access(filePath + files[i].filename, fs.constants.F_OK, (err) => {
             if (err) console.log('file cannot be deleted');
             else {
-              fs.unlink(filePath + files[i].filename, (err) => {
+              fs.unlink(filePath + req.files[i].filename, (err) => {
                 if (err) {
                   console.log(err);
                 }
