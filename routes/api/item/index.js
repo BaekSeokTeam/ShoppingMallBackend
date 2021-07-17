@@ -45,4 +45,6 @@ router.post('/delete',controller.deleteItem);
 router.post('/edit',controller.editItem);
 router.get('/viewAll',controller.viewAllItem);
 
+//router.get('/test',controller.test);
+
 module.exports = router;

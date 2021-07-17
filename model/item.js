@@ -15,10 +15,10 @@ const Item = new Schema({
     name: { type: String, required: true, unique: true },
     description: String,
     price: Number,
+    imgURL: [String],
     size:[String],
     count:[Number],
-    tag:[String],
-    imgURL: [String],
+    Tag:[String],
     uploadedDate:{type:Date, default:Date.now}
   });
 
@@ -30,7 +30,7 @@ const Item = new Schema({
     return newItem.save();
   };
 
-
+  
   Item.statics.findOneByName = function (name) {
     return this.findOne({
       name,
