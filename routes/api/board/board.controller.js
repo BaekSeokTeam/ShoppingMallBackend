@@ -18,14 +18,10 @@ exports.write = async(req,res) => {
 
 exports.rewrite = (req,res) => {
 
-    const description = req.body.description;
+    
 
-    Board.rewritepost( {description:description}, () =>{
-        res.json({
-            success:true,
-            description:description
-        })
-    })
+    Board.rewritepost(req.body)
+    
 }
 
 exports.deletePost = (req, res) => {
@@ -33,4 +29,3 @@ exports.deletePost = (req, res) => {
 
 }
 
-module.exports = router;

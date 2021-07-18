@@ -13,7 +13,6 @@ const Board = new Schema({
 Board.statics.create = function ( body ) {
 
     const newBoard = new this(body);
-
     return newBoard.save();
 
 };
@@ -23,7 +22,7 @@ Board.statics.rewritepost = async function ( body ) {
     const boardId=body.boardId;
     const description=body.description;
     await Board.findOne({"_id":boardId},{description:description})
-    res.json({
+    res.json({  
         success:true,
         description:description
     })

@@ -1,6 +1,8 @@
-var express = require(express);
+var express = require('express');
 var router = express.Router();
-const controller = requore("./board.controller");
+const controller = require("./board.controller");
 
 router.post('/write',controller.write);
 router.post('/rewrite',controller.rewrite);
+
+module.exports = router;
