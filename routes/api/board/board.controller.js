@@ -4,6 +4,7 @@ exports.write = async(req,res) => {
 
     const newPost = {
 
+    writer:req.user._id,
     title: req.body.title, 
     description: req.body.description,
 
