@@ -29,4 +29,7 @@ router.use('/users', user);
 router.get('/img', function(req, res, next) {
   res.render('index', { title: 'img' });
 });
+router.get('/hello', function(req, res, next) {
+  res.send('test success');
+});
 module.exports = router;

@@ -24,15 +24,15 @@ router.post('/signin',  async(req, res, next) => {
 			// 인증이 실패했거나 유저 데이터가 없다면 에러 발생
       if (passportError || !user) {
 
-        console.log(passportError)
-        res.status(403).json({info});
+
+        res.status(200).json(info);
         return;
       }
 			// user데이터를 통해 로그인 진행
       req.login(user, { session: false }, (loginError) => {
 
         if (loginError) {
-          res.send(loginError);
+          res.json(loginError);
           return;
         }
 		// 클라이언트에게 JWT생성 후 반환
@@ -43,7 +43,10 @@ router.post('/signin',  async(req, res, next) => {
         expiresIn: '1d'    // 유효 시간은 1일
       }
 		);
-       res.json({ token });
+       res.json({
+        success:true,
+        token:token
+       });
       });
     })(req, res);
   } catch (error) {
