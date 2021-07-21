@@ -41,7 +41,7 @@ router.post('/signin',  async(req, res, next) => {
 			process.env.JWT_SECRET,
       {
         expiresIn: '1d'    // 유효 시간은 1일
-      }
+      } 
 		);
        res.json({
         success:true,
