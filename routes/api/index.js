@@ -30,10 +30,10 @@ router.get('/img', function(req, res, next) {
   res.render('index', { title: 'img' });
 });
 router.get('/hello', function(req, res, next) {
-  const token = req.headers.authorization.split('Bearer ')[1];
-  console.log(token)
+
+
   res.json({
-    token
+    hello:"hi"
   })
 });
 

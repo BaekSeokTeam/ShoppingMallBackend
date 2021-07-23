@@ -38,7 +38,7 @@ router.post('/signin',  async(req, res, next) => {
 		// 클라이언트에게 JWT생성 후 반환
 		const token = jwt.sign(
 			{ email: user.email},
-			process.env.JWT_SECRET,
+			process.env.JWT_SECRET, 
       {
         expiresIn: '1d'    // 유효 시간은 1일
       } 
