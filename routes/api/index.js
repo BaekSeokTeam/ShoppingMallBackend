@@ -25,6 +25,8 @@ router.use('/cart', auth);
 router.use('/cart', cart);
 router.use('/board',auth);
 router.use('/board',board);
+router.use('/buy',auth);
+router.use('/buy',board)
 router.use('/users', user);
 router.get('/img', function(req, res, next) {
   res.render('index', { title: 'img' });
