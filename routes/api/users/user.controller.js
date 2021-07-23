@@ -66,7 +66,13 @@ exports.checkEmail = (req, res) => {
 
 
 exports.signUp = (req, res) => {
-  const { email,nickname, password,passwordCheck, phonenumber } = req.body;
+  console.log(req.body)
+
+  const email=req.body.Email
+  const nickname=req.body.Nickname
+  const password=req.body.Password
+  const passwordCheck=req.body.PasswordCheck
+  const phonenumber=req.body.PhoneNumber
 
   // create a new user if does not exist
 
@@ -110,7 +116,7 @@ exports.signUp = (req, res) => {
   // run when there is an error (username exists)
   const onError = (error) => {
 
-    res.status(403).json({
+    res.status(200).json({
       
       signup: false,  
       error: error.message,
