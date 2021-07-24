@@ -8,12 +8,12 @@ const adminAuth = (req, res, next) => {
             next();
         }
       else{
-        res.status(403).json({
+        res.status(200).json({
             message:"접근권한이 없습니다"
         });
       }
     } else {
-      res.status(403).json({
+      res.status(200).json({
           message:"로그인을 해주세요"
       });
     }

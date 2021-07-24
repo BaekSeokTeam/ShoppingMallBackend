@@ -12,7 +12,7 @@ exports.checkNickname = (req, res) => {
   };
   
   const respond=(True)=>{
-    res.json({
+    res.json({  
       success:true,
       nickname:nickname
     
@@ -62,7 +62,6 @@ exports.checkEmail = (req, res) => {
   .then(respond)
   .catch(onError);
 };
-
 
 
 exports.signUp = (req, res) => {
@@ -131,4 +130,12 @@ exports.signUp = (req, res) => {
     .then(assign)
     .then(respond)
     .catch(onError);
-};
+};  
+
+exports.getAuth=(req,res)=>{
+    
+      res.json({
+        user:req.user
+      })
+    
+}

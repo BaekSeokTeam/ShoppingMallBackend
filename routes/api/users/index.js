@@ -54,6 +54,7 @@ router.post('/signin',  async(req, res, next) => {
     next(error);
   }
 });
+router.get('/auth', controller.getAuth);
 
 
 module.exports = router;

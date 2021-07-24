@@ -6,7 +6,9 @@ const auth = (req, res, next) => {
       req.user = user;
       next();
     } else {
-      res.status(403).json({
+      req.user=null;
+      res.status(200).json({
+          
           message:"로그인을 해주세요"
       });
     }
