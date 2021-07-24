@@ -8,7 +8,6 @@ const auth = (req, res, next) => {
     } else {
       req.user=null;
       res.status(200).json({
-          
           message:"로그인을 해주세요"
       });
     }

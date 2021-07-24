@@ -4,6 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const controller = require('./user.controller');
 const auth=require('../../../middleware/auth')
+
 require('dotenv').config();
 
 /* GET home page. */
@@ -54,7 +55,7 @@ router.post('/signin',  async(req, res, next) => {
     next(error);
   }
 });
-router.get('/auth', controller.getAuth);
+router.get('/auth', auth,controller.getAuth);
 
 
 module.exports = router;
