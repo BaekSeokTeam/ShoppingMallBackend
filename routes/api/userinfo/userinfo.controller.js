@@ -2,16 +2,12 @@ const User = require('../../../model/user');
 const Cart = require('../../../model/cart');
 
 exports.changeUserInfo =(req,res)=>{
-    const phonenumber= req.body.phonenumber
-    const address={
-        roadAddr:req.body.roadAddr,
-        detailedAddr:req.body.detailedAddr
-    }
-    User.updateOne({email:req.user.email},{phonenumber:phonenumber,address:address},()=>{
+    const nickname= req.body.nickname
+
+    User.updateOne({email:req.user.email},{nickname:nickname},()=>{
         res.json({
             success:true,
-            phonenumber:phonenumber,
-            address:address
+            nickname:nickname
         })
     }
     )

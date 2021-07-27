@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
         body:req.user
     })
 });
-router.post('/revise', controller.changeUserInfo);
+router.post('/revise',controller.changeUserInfo);
 router.get('/getcartlist', controller.getCart);
 
 module.exports = router;

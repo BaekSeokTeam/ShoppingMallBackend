@@ -19,7 +19,7 @@ exports.checkNickname = (req, res) => {
     });
   };
   const onError=(error)=>{
-    res.status(403).json({
+    res.status(200).json({
       success: false,
       error: error.message,
      
@@ -51,7 +51,7 @@ exports.checkEmail = (req, res) => {
     });
   };
   const onError=(error)=>{
-    res.status(403).json({
+    res.status(200).json({
       success: false,
       error: error.message,
      
@@ -136,7 +136,7 @@ exports.getAuth=(req,res)=>{
 
 
       res.json({
-        user:req.user
+        user:user
       })
     
 }
