@@ -5,9 +5,22 @@ exports.changeUserInfo =(req,res)=>{
     const nickname= req.body.nickname
 
     User.updateOne({email:req.user.email},{nickname:nickname},()=>{
-        res.json({
+          res.json({
             success:true,
             nickname:nickname
+        })
+    }
+    )
+    
+};
+exports.changeAddress =(req,res)=>{
+    
+    const address= req.body.address
+
+    User.updateOne({email:req.user.email},{address:address},()=>{
+          res.json({
+            success:true,
+            address:address
         })
     }
     )

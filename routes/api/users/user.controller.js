@@ -6,7 +6,7 @@ exports.checkNickname = (req, res) => {
   const nickname=req.query.nickname
   const check=(user)=>{
     if(user){
-      throw new Error('이미 가입된 닉네임 입니다.');
+      throw new Error('이미 가입된 닉네임 입니다.');  
     }
     return user
   };
