@@ -2,20 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /*
-
-totalPrice:총 물건 가격
-payPrice:직접 결제한 금액
-pointPrice: 포인트로 결제한 금액
+Price:총 물건 가격
+포인트로만 구매하게 하면서 price 통일
 */
 const Order = new Schema({
     user_id: String,
     item_id: String,
     item_size: Number,
     item_count: Number,
-
-    totalPrice: Number,
-    pointPrice: Number,
-    payPrice: number,
+    Price: number,
     
     
     
