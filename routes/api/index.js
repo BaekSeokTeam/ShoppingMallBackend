@@ -32,8 +32,6 @@ router.get('/img', function(req, res, next) {
   res.render('index', { title: 'img' });
 });
 router.get('/hello', function(req, res, next) {
-
-
   res.json({
     hello:"hi"
   })

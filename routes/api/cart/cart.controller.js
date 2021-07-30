@@ -24,8 +24,7 @@ exports.showAll =async(req,res)=>{
 };
 
 exports.deleteCart =async(req,res)=>{
-
-
+    console.log(req.body.cart)
     await Cart.deleteOne({_id:req.body.cart})
     return res.json({
         success:true
