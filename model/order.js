@@ -10,20 +10,27 @@ const Order = new Schema({
     item_id: String,
     item_size: Number,
     item_count: Number,
-    Price: number,
+    Price: Number,
     
     
-    
-    ordetState: String,
+    //orderState : ordered(주문됨)->shipping(배송중)->shiped(배송완료) / canceled(취소됨)
+    orderState: String,
     orderDate:{type:Date, default:Date.now}
     
   });
 
-  Order.statics.create = function (body) {
+Order.statics.create = function (body) {
 
     const newOrder = new this(body);
   
     // return the Promise
     return newOrder.save();
   };
-  module.exports = mongoose.model('Order', Order);
+
+
+Order.statics.findOneByID = function (user_id) {
+    return this.findOne({
+      user_id,
+    }).exec();
+  };
+module.exports = mongoose.model('Order', Order);

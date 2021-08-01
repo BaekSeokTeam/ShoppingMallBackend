@@ -8,6 +8,7 @@ var admin=require('./admin/index')
 var item=require('./item/index')
 var cart=require('./cart/index')
 var board=require('./board/index')
+var buy=require('./buy/index')
 const fs = require('fs');
 const path = require('path');
 const filePath = path.join(__dirname, '../../public/api/');
@@ -25,8 +26,8 @@ router.use('/cart', auth);
 router.use('/cart', cart);
 router.use('/board',auth);
 router.use('/board',board);
-router.use('/buy',auth);
-router.use('/buy',board)
+//router.use('/buy',auth);
+router.use('/buy',buy)
 router.use('/users', user);
 router.get('/img', function(req, res, next) {
   res.render('index', { title: 'img' });
