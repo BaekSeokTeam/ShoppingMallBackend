@@ -6,6 +6,7 @@ const filePath = path.join(__dirname, '../../../public/images/');
 exports.addItem =(req,res)=>{
     var imgURL=[]
     const files=req.files
+    console.log(files)
     for(var i=0;i<files.length;i++){
         imgURL.push(`http://localhost:3000/images/`+files[i].filename)
     }
