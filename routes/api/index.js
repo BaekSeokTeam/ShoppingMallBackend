@@ -16,6 +16,11 @@ const filePath = path.join(__dirname, '../../public/api/');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'api' });
 });
+router.get('/test', function(req, res, next) {
+  res.json({
+    result:1
+  })
+});
 router.use('/userinfo', auth);
 router.use('/userinfo', userinfo);
 router.use('/admin', adminAuth);
