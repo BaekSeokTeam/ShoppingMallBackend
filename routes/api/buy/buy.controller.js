@@ -1,4 +1,4 @@
-const Board = require('../../../model/order');
+const Order = require('../../../model/order');
 
 const User = require('../../../model/user');
 
@@ -13,30 +13,14 @@ exports.buy =async(req,res)=>{
         item_size: req.body.item_size,
         item_count:req.body.item_count,
         price:req.body.price,
-        orderState:ordered
+        orderState:'ordered'
         
     }
 
-    const create = (order) => {
-        if (order) {
-          throw new Error('item exists');
-        } else {
-          return Order.create(orderInfo);
-        }
-      };
-
-    const respond = (itemInfo) => {
-        res.json({
-            success:true
-        });
-      };
-    const onError = (error) => {
-        res.status(403).json({
-            success:false,
-            error:error.message
-        });
-      };
-      Order.findOneByName(orderInfo.name).then(create).then(respond).catch(onError);
+    await Order.create(orderInfo)
+    return res.json({
+        success:true
+    })
 };
 
 
