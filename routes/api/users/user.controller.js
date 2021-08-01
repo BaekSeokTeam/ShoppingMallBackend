@@ -134,7 +134,7 @@ exports.signUp = (req, res) => {
 
 exports.getAuth=(req,res)=>{
 
-
+      
       res.json({
         user:user
       })
