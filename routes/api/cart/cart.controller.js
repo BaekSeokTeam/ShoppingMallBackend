@@ -30,3 +30,10 @@ exports.deleteCart =async(req,res)=>{
         success:true
     })
 };
+exports.getCartInfo =async(req,res)=>{
+    cart=await Cart.findOne({_id:req.query.id})
+    return res.json({
+        success:true,
+        cart:cart
+    })
+};

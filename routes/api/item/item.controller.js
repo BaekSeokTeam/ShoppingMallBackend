@@ -167,6 +167,7 @@ exports.viewAllItem =async(req,res)=>{
 
 };
 exports.getItem =async(req,res)=>{
+  console.log(req.query.item)
   const item= await Item.findOne({_id:req.query.item})
   if(item){
     res.json({
