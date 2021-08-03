@@ -1,6 +1,7 @@
 const Cart = require('../../../model/cart');
 
 exports.addCart =async(req,res)=>{
+    console.log(req.body)
     const query={
         user:req.user._id,
         item:req.body.item,
