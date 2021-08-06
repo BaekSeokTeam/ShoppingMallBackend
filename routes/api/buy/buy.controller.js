@@ -25,27 +25,8 @@ exports.buy =async(req,res)=>{
 
 
 
-//여기 말고 admin쪽으로 옮겨야 할듯한데 일단 여기 해둠
-//유저 아이디랑 포인트 입력하면 포인트 넣어줌
-exports.givePoint =async(req,res)=>{
 
 
-    const email = req.user.email
-    const user=await User.findOne({email:email})
-
-    newPoint = User.point + req.user.point
-    
-
-    User.updateOne({email:req.user.email},{point:newPoint},()=>{
-        res.json({
-            success:true,
-            point:newPoint
-        })
-    }
-    )
-    
-
-};
 
 //order id를 받아와서
 exports.stateChange =async(req,res)=>{
