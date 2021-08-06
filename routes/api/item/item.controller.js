@@ -65,7 +65,6 @@ exports.deleteItem =async(req,res)=>{
  
 
   const item=await Item.findOne({name:req.body.name})
-  console.debug(item)
   //입력받은 이름에 해당하는 item 있는지 확인해서 없으면 false, 있으면 삭제하고 삭제한 이름 반환
   if(item == null) {
     res.json({
@@ -104,7 +103,6 @@ exports.deleteItem =async(req,res)=>{
 //현재는 name을 기준으로 그 외의 정보 수정
 exports.editItem =async(req,res)=>{
     
-
 
     const item=await Item.findOne({name:req.body.name})
     //console.debug(item)

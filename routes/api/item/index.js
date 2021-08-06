@@ -42,6 +42,7 @@ const imageUpload = multer({
 router.post('/add', imageUpload.array('image'));
 router.post('/add',controller.addItem);
 router.post('/delete',controller.deleteItem);
+router.post('/edit', imageUpload.array('image'));
 router.post('/edit',controller.editItem);
 router.get('/viewAll',controller.viewAllItem);
 router.get("/get",controller.getItem)
