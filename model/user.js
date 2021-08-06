@@ -8,10 +8,12 @@ const User = new Schema({
   password: { type: String, required: true },
   nickname:{type: String, required: true, unique: true},
   phonenumber: { type: String, required: true },
-  address:[{
-    roadAddr:String,
-    detailedAddr:String
-  }],
+  address:{
+    type:Array,
+    default:[{
+    roadAddr:"",
+    detailedAddr:""
+  }]},
   admin: { type: Boolean, default: false },
   status:{type:Boolean,default:true},
   point:{type:Number,default:0}
