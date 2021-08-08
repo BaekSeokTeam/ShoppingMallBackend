@@ -11,6 +11,12 @@ const Order = new Schema({
     item_size: Number,
     item_count: Number,
     Price: Number,
+    address:{
+      
+      default:{
+      roadAddr:"",
+      detailedAddr:""
+    }},
     
     
     //orderState : ordered(주문됨)->shipping(배송중)->shiped(배송완료) / canceled(취소됨)

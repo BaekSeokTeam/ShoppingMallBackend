@@ -6,21 +6,39 @@ const User = require('../../../model/user');
 //일단 주소는 입력이 아니라 로그인한 유저의 address 가져옴. 나중에 주소 입력 추가
 exports.buy =async(req,res)=>{
 
-   
-    const orderInfo={
-        user_id: req.body.user_id,//일단은 입력으로 해둠
-        item_id: req.body.item_id,
-        item_size: req.body.item_size,
-        item_count:req.body.item_count,
-        price:req.body.price,
-        orderState:'ordered'
-        
-    }
+    const buyer=await User.findOne({email:req.body.email}) // 일단 req에서 주는거로 해둠
 
-    await Order.create(orderInfo)
-    return res.json({
-        success:true
-    })
+    if(buyer == null) {
+        res.json({
+          success:false,
+          reason:'계정 에러'
+        })
+    } else if(buyer.point < req.body.price){
+        res.json({
+            success:false,
+            reason:'포인트 잔액 부족'
+          })
+    } else {
+        const orderInfo={
+            user_id: buyer._id,
+            item_id: req.body.item_id,
+            item_size: req.body.item_size,
+            item_count:req.body.item_count,
+            price:req.body.price,
+            address:buyer.address[0],
+            orderState:'ordered'
+            
+        }
+        //User.updateOne({email:req.body.email},{point:buyer.point -req.body.price})
+        await Order.create(orderInfo)
+        return res.json({
+            success:true
+        })
+    }
+   
+
+
+
 };
 
 
@@ -61,5 +79,19 @@ exports.viewAllOrder =async(req,res)=>{
     Order.find( (err, orders) => {
         if(err) return res.status(500).send({error: 'database failure'});
         res.json(orders);
+    })
+};
+
+//주문 전체삭제
+//
+exports.deleteAllOrder =async(req,res)=>{
+
+    
+    Order.deleteMany({}, function(err,obj){
+        if (err) return res.json({success:false, err})
+        res.json({
+         success:true
+           
+       })
     })
 };

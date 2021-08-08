@@ -9,5 +9,5 @@ router.post('/buy',controller.buy);
 
 router.post('/stateChange',controller.stateChange)
 router.get('/viewAll',controller.viewAllOrder);
-
+router.get('/deleteAll',controller.deleteAllOrder);
 module.exports = router;
