@@ -29,7 +29,13 @@ exports.buy =async(req,res)=>{
             orderState:'ordered'
             
         }
-        //User.updateOne({email:req.body.email},{point:buyer.point -req.body.price})
+        afterpoint = buyer.point -req.body.price
+        console.log(afterpoint)
+        User.updateOne({email:req.body.email},{point:afterpoint},()=>{
+            
+        });
+
+
         await Order.create(orderInfo)
         return res.json({
             success:true
