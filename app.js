@@ -25,8 +25,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+const root=path.join(__dirname, '..','client','build')
+app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile('index.html', { root });
+})
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
