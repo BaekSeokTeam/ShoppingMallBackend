@@ -8,7 +8,7 @@ exports.addItem =(req,res)=>{
     const files=req.files
     console.log(files)
     for(var i=0;i<files.length;i++){
-        imgURL.push(`http://localhost:3000/images/`+files[i].filename)
+        imgURL.push(`http://localhost:5000/images/`+files[i].filename)
     }
 
 //    res.json({
