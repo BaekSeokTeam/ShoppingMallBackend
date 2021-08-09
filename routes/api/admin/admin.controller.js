@@ -42,8 +42,7 @@ exports.givePoint =async(req,res)=>{
             success:true,
             point:newPoint
         })
-    }
-    )
+    })
     
 
 };
