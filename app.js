@@ -31,9 +31,9 @@ app.use(express.static(root));
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
-app.get("*", (req, res) => {
-  res.sendFile('index.html', { root });
-})
+  app.get("*", (req, res) => {
+    res.sendFile('index.html', { root });
+  })
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
